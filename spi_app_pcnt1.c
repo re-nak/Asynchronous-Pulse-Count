@@ -87,7 +87,6 @@ static void spiTask(void* unused) {
    int                          err;
    dn_spi_open_args_t           spiOpenArgs;
    dn_ioctl_spi_transfer_t      spiTransfer;
-   INT8U                        receivedSomething;
    INT8U                        i;
    
    
@@ -162,17 +161,7 @@ static void spiTask(void* unused) {
       for (i=0;i<sizeof(spi_app_v.spiTxBuffer);i++) {
          dnm_ucli_printf(" %02x",spi_app_v.spiTxBuffer[i]);
       }
-      dnm_ucli_printf("\r\n");
-      
-      //===== step 2. verify we received something over SPI
-      
-      receivedSomething = 0;
-      for (i=0;i<sizeof(spi_app_v.spiRxBuffer);i++) {
-         if (spi_app_v.spiRxBuffer[i]!=0xff) {
-            receivedSomething = 1;
-         }
-      }
-      
+      dnm_ucli_printf("\r\n");      
       
       // print on CLI
       dnm_ucli_printf("SPI received:",err);
